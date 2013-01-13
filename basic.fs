@@ -71,12 +71,13 @@ let rec a k acc =
     if k = 0 then Array.set acc 0 1 
     else 
         if k % 2 = 0 then
-            let n = k/2 in
+            let n = (k/2) in
             let v = sum 0 (n-1) (fun i-> acc.[i] * acc.[2*n-i-1])
             Array.set acc k v
         else
             let n = (k-1)/2 in
-            let v = sum 0 (n-1) (fun i-> acc.[i] * acc.[2*n-i-1]) + (choose (acc.[n]) 2) + acc.[n] in
+            let s = sum 0 (n-1) (fun i->acc.[i] * acc.[2*n-i]) in
+            let v = s + (choose acc.[n] 2) + acc.[n]
             Array.set acc k v
 
 let an n = 
@@ -89,5 +90,5 @@ let an n =
 
 
 let main =
-    a 7
+    an 5
     
